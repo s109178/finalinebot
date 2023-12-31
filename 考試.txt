@@ -1,0 +1,6 @@
+git config --global user.email "s1091781@gm.pu.edu.tw"
+git config --global user.name "s109178"
+git remote add origin https://s109178@github.com/s109178/finalinebot.git
+git add .                                    
+git commit -am "version 0: html5"
+git push origin master
