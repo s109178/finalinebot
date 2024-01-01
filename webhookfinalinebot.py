@@ -11,7 +11,7 @@ from flask import Flask, render_template, request,make_response, jsonify
 from datetime import datetime
 
 
-app = Flask(name)
+app = Flask(__name__)
 
 
 @app.route("/webhookfinalinebot", methods=["POST"])
