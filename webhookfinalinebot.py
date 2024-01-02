@@ -24,14 +24,14 @@ def webhookfinalinebot():
         info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
 
         db = firestore.client()
-        collection_ref = db.collection("運勢網站含星座")
+        collection_ref = db.collection("星座")
         docs = collection_ref.get()
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if rate in dict["ZodiacSigns"]:
-                result += "片名：" + dict["title"] + "\n"
-                result += "介紹：" + dict["hyperlink"] + "\n\n"
+            if ZodiacSigns in dict["ZodiacSigns"]:
+                result += "星座名：" + dict["title"] + "\n"
+                result += "運勢：" + dict["hyperlink"] + "\n\n"
         info += result
     
         
