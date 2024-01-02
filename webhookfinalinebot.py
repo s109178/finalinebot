@@ -1,4 +1,4 @@
-import requests, json
+import requests,json
 from bs4 import BeautifulSoup
 
 import firebase_admin
@@ -19,19 +19,22 @@ def webhookfinalinebot():
     req = request.get_json(force=True)
     action = req.get("queryResult").get("action")
 
-    if action == "zodiaChoice":
+    if (action == "zodiaChoice"):
         ZodiacSigns = req.get("queryResult").get("parameters").get("ZodiacSigns")
-        info = f"您選擇的星座是：{ZodiacSigns}，星座運勢：\n"
+        info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
 
-        url = "https://www.cosmopolitan.com/tw/horoscopes/today/"
-        response = requests.get(url)
+        db = firestore.client()
+        collection_ref = db.collection("運勢網站含星座")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if rate in dict["ZodiacSigns"]:
+                result += "片名：" + dict["title"] + "\n"
+                result += "介紹：" + dict["hyperlink"] + "\n\n"
+        info += result
+    
         
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.content, "html.parser")
-            # 此處需要修改為JSON-LD資料中提供的星座URL
-            # 假設星座資訊在<div class="your-class">裡面
-            zodiac_info = soup.find("div", class_="your-class").text
-            info += zodiac_info
 
     return make_response(jsonify({"fulfillmentText": info}))
 
