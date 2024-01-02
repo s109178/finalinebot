@@ -28,6 +28,7 @@ def index():
     homepage += "<a href=/read>書名查詢</a><br>"
     homepage += "<a href=/spider>網路爬蟲抓取楊子清老師網站的課程</a><br>"
     homepage += "<br><a href=/webhook3>讀取開眼電影即將上映影片，寫入Firestore</a><br>"
+    homepage += "<br><a href=/webhookfinalinebot></a><br>"
     return homepage
 
 
@@ -169,21 +170,21 @@ def webhook3():
 def webhookfinalinebot():
     req = request.get_json(force=True)
     action = req.get("queryResult").get("action")
+    info = action
+    #if (action == "zodiaChoice"):
+        #ZodiacSigns = req.get("queryResult").get("parameters").get("ZodiacSigns")
+        #info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
 
-    if (action == "zodiaChoice"):
-        ZodiacSigns = req.get("queryResult").get("parameters").get("ZodiacSigns")
-        info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
-
-        db = firestore.client()
-        collection_ref = db.collection("星座")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            if ZodiacSigns in dict["ZodiacSigns"]:
-                result += "星座名：" + dict["title"] + "\n"
-                result += "運勢：" + dict["hyperlink"] + "\n\n"
-        info += result
+        #db = firestore.client()
+        #collection_ref = db.collection("星座")
+        #docs = collection_ref.get()
+        #result = ""
+        #for doc in docs:
+            #dict = doc.to_dict()
+            #if ZodiacSigns in dict["ZodiacSigns"]:
+                #result += "星座名：" + dict["title"] + "\n"
+                #result += "運勢：" + dict["hyperlink"] + "\n\n"
+        #info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
