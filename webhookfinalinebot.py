@@ -33,9 +33,6 @@ def webhookfinalinebot():
                 result += "星座名：" + dict["title"] + "\n"
                 result += "運勢：" + dict["hyperlink"] + "\n\n"
         info += result
-    
-        
-
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
