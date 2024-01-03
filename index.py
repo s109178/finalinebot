@@ -37,9 +37,9 @@ def webhookfinalinebot():
     req = request.get_json(force=True)
     action = req.get("queryResult").get("action")
     info = action
-    #if (action == "zodiaChoice"):
-        #ZodiacSigns = req.get("queryResult").get("parameters").get("ZodiacSigns")
-        #info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
+    if (action == "zodiaChoice"):
+        ZodiacSigns = req.get("queryResult").get("parameters").get("ZodiacSigns")
+        info = "您選擇的星座是:" + ZodiacSigns +"，星座運勢：\n"
 
         #db = firestore.client()
         #collection_ref = db.collection("星座")
