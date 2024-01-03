@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    homepage = "<h1>顏仁駿Python網頁1/3b</h1>"
+    homepage = "<h1>顏仁駿Python網頁1/3c</h1>"
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
     homepage += "<a href=/welcome?nick=>傳送使用者暱稱</a><br>"
@@ -47,7 +47,7 @@ def webhookfinalinebot():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if ZodiacSigns in dict["ZodiacSigns"]:
+            if ZodiacSigns in dict["title"]:
                 result += "星座名：" + dict["title"] + "\n"
                 result += "運勢：" + dict["hyperlink"] + "\n\n"
         info += result
